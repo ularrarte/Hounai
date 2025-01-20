@@ -15,8 +15,7 @@ class FontDemo(QtWidgets.QWidget):
         except:
             mssg = "Please select a OUT node to continue"
             hou.ui.displayMessage(mssg, severity=hou.severityType.Error)
-            quit()
-            
+            quit()            
         
         QtWidgets.QWidget.__init__(self, parent)
         self.setWindowFlags(self.windowFlags() ^ QtCore.Qt.WindowStaysOnTopHint)
@@ -30,8 +29,7 @@ class FontDemo(QtWidgets.QWidget):
 
         self.resize(500, 140)
         self.setMaximumHeight(140)
-        self.setMinimumHeight(140)
-        
+        self.setMinimumHeight(140)        
         self.setWindowTitle('Updator')
         
         self.label = QtWidgets.QLabel('Select one of the folowing options:', self)
@@ -40,7 +38,6 @@ class FontDemo(QtWidgets.QWidget):
 
         self.button = QtWidgets.QPushButton('Updates Cahes', self)
         self.button.setFocusPolicy(QtCore.Qt.NoFocus)
-
         
         self.chechbox = QtWidgets.QCheckBox('Save Houdini File', self)
 
@@ -50,9 +47,9 @@ class FontDemo(QtWidgets.QWidget):
         self.button2.setFocusPolicy(QtCore.Qt.NoFocus)
         
         hbox.addWidget(self.button2)
-        vbox.addWidget(self.chechbox)
-        
+        vbox.addWidget(self.chechbox)        
         low.addWidget(self.label)
+        
         low.addLayout(hbox)
         low.addLayout(vbox)
         
@@ -92,7 +89,7 @@ class FontDemo(QtWidgets.QWidget):
                 parameter = node.parm("vm_picture")
                 path = node.parm("vm_picture").unexpandedString() 
             
-            #   Formating the base path, in case is not setted-up
+            #   Formating the base path, in case is not setted-up. Custom env. varibles.
             shot = hou.hscriptExpression('$SHOT')
             layer = hou.hscriptExpression('$LAYER')
             discipline = hou.hscriptExpression('$DISCIPLINE')
@@ -130,7 +127,7 @@ class FontDemo(QtWidgets.QWidget):
         nodes = hou.selectedNodes()
         for node in nodes:
         
-            node_type = node.type().nameComponents()[2]    
+            node_type = node.type().nameComponents()[2]   
             
             hip_name = hou.hipFile.path()
             hn_list = hip_name.split(".")
@@ -195,16 +192,6 @@ class FontDemo(QtWidgets.QWidget):
                 node.parm('vm_dcmfilename').set(deep_cache_path)
             
         if(self.chechbox.isChecked()):
-            hou.hipFile.save(new_hf)
-            
-    def test(self):
-    def culo(self):
-        if self.chechbox.isChecked():
-            print("checked")
-        else:
-            print("no checked")
-            
+            hou.hipFile.save(new_hf)            
             
 dialog = FontDemo()
-
-
