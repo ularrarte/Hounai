@@ -13,7 +13,10 @@ Note: The intensity of the lights will have to be checked by the user, since it 
 
 ## Upgrde version and update output paths
 Another company situation: No matter what, before sending some final *.exr* renders to the farm, your were forced to create a new version of the file. At that moment, the original file is locked and stored into the company storage as part of the normal pipeline work. 
-This situation was a bit frustrating, as sometimes you wanted to have two similar version of the shot under the same big version: 
+This situation was a bit frustrating, as sometimes you wanted to have two similar version of the shot under the same father version: 
 
 - Case 1: v16.0 with 1 time scale.
 - Case 2: v16.1 with 1.5 time scale and 3 times density.
+
+To fix this I created <a href="https://github.com/ularrarte/Hounai/blob/main/Updator.py">Updator</a>, a tool that, taking into account the version in which the user is, allows to create intermediate versions, updating also all the necessary paths in the OUT nodes (the location of the files was something quite robust within the pipeline and could not be altered). 
+In order to make the tool user-friendly, a graphical interface was also developed using PySide2.
