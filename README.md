@@ -23,9 +23,10 @@ To enhance usability, I also designed a graphical interface using PySide2.
 
 ## Add points or objects to a any surface through viewport
 
-One of the first tools that I developed.
+This was a small experiment I conducted while I was learning Houdini to understand how to integrate Python into a tool. 
+I developed a tool using viewer states that allows me to position any object tangent to a surface using only the mouse. The tool also enables me (just with te mouse) to change the object's orientation and size. Additionally, once the object is positioned, all its attributes—such as position, scale, orientation, and type—can be accessed through the multiparm created in the node.
 
-
+Aquick video of how that tool works can be checked <a href="https://www.youtube.com/watch?v=B2-zxt-H1hA">here</a>.
 
 
 ##
