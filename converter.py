@@ -2,8 +2,7 @@ import hou, math
 
 def conversor():
     nodes = hou.selectedNodes()
-
-
+    
     for node in nodes:
 
         node_type = node.type().nameComponents()[2]
@@ -14,8 +13,7 @@ def conversor():
             quit()
     
         
-        # Function the get parameters from the Arnold Node
-        
+        # Function the get parameters from the Arnold Node        
         def getKeyframes():
             kfms = {}
             parameters = node.parms()
@@ -60,7 +58,6 @@ def conversor():
             
         
         # Functions to set the parameters for the mantra light
-
         def setTras(trs):
             m_node.parm('tx').set(trs[0])
             m_node.parm('ty').set(trs[1])
@@ -104,7 +101,7 @@ def conversor():
         
         
         def setType(type, trs, m_node):
-
+            
             # Type 0 in Arnold (Point) is type 0 in Mantra (Point)
             # Type 1 in Arnold (Distant) is type 7 in Mantra
             # Type 2 in Arnold (Spot) is type 3 in Mantra
@@ -141,7 +138,6 @@ def conversor():
 
             elif type == 3:
                 ## QUAD LIGHT
-
                 # Set the grid scale
                 quad_x = node.parm('ar_quad_sizex').eval()
                 quad_y = node.parm('ar_quad_sizey').eval()
@@ -149,7 +145,6 @@ def conversor():
                 m_node.parm('areasize2').set(quad_y)
             elif type == 4:
                 # DISK/CONE LIGHT
-
                 # Set radius scale for the cone
                 disk_r = node.parm('ar_disk_radius').eval()
                 # In mantra we set the perimeter, not the radius
@@ -157,7 +152,6 @@ def conversor():
                 m_node.parm('areasize2').set(disk_r * 2)
             elif type == 5:
                 # CYLINDER/TUBE LIGHT
-
                 # Get tube rad. and height from the arnold node
                 tube_r = node.parm('ar_cylinder_radius').eval()
                 tube_h = node.parm('ar_height').eval()
@@ -169,7 +163,6 @@ def conversor():
                 setRot(rot)
             elif type == 6:
                 # SKYDOME/ENVIRONMENTAL LIGHT
-
                 # Checking the color type for this node
                 texture = node.parm('ar_light_color_type').eval()
                 # If there is a texture, we copy that path to our mantra node
@@ -183,38 +176,29 @@ def conversor():
                     m_node.parm('env_map').set(mat_node)
                     
                     # In order to match the initial rotation, we need to rotate it 180
-                    m_node.parm('ry').set(m_node.parm('ry').eval() + 180)
-            
+                    m_node.parm('ry').set(m_node.parm('ry').eval() + 180)            
             
         
-        def setIntExp(int, exp, type):        
-            
-            
+        def setIntExp(int, exp, type):            
             total_int = int * pow(2, exp)
-            m_node.parm('light_intensity').set(int)
-            
+            m_node.parm('light_intensity').set(int)            
             # Using the type that we used to set the light type.
             if type == 0:
-                # int * pow(2, exp) = total_int
-                # pow(2, exp) = total_int/int
                 r_side = (total_int/int)/6
                 exposure = (math.log(r_side))/(math.log(2))
                 m_node.parm('light_exposure').set(exposure)
+                
             if type == 1:
-                # int * pow(2, exp) = total_int
-                # pow(2, exp) = total_int/int
                 r_side = (total_int/int)/6
                 exposure = (math.log(r_side))/(math.log(2))
                 m_node.parm('light_exposure').set(exposure)
+                
             if type == 2:
-                # int * pow(2, exp) = total_int
-                # pow(2, exp) = total_int/int
                 r_side = (total_int/int)/6
                 exposure = (math.log(r_side))/(math.log(2))
                 m_node.parm('light_exposure').set(exposure)
+                
             if type == 3:
-                # int * pow(2, exp) = total_int
-                # pow(2, exp) = total_int/int
                 r_side = (total_int/int)/6        
                 exposure = (math.log(r_side))/(math.log(2))
                 exposure = exposure + ( 1 - node.parm('ar_spread').eval())
@@ -223,27 +207,23 @@ def conversor():
                 m_node.parm('light_exposure').set(exposure)
                 m_node.parm('light_intensity').set(int)
                 m_node.parm('normalizearea').set(0)
+                
             if type == 4:
-                # int * pow(2, exp) = total_int
-                # pow(2, exp) = total_int/int
                 r_side = (total_int/int)/3
                 exposure = (math.log(r_side))/(math.log(2))
                 
                 exposure = exposure + ( 1 - node.parm('ar_spread').eval())
                 int = int + int/node.parm('ar_spread').eval()
                 
-                m_node.parm('light_exposure').set(exposure)
+                m_node.parm('light_exposure').set(exposure)   
                 
             if type == 5:
-                # int * pow(2, exp) = total_int
-                # pow(2, exp) = total_int/int
                 r_side = (total_int/int)/10
                 exposure = (math.log(r_side))/(math.log(2))
                 m_node.parm('light_exposure').set(exposure)
-
+                
             if type == 6:
-                m_node.parm('light_exposure').set(exp)
-                    
+                m_node.parm('light_exposure').set(exp)                 
             
                 
         # Get the type of Arnold light    
