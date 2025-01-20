@@ -21,6 +21,18 @@ Another company situation: No matter what, before sending some final *.exr* rend
 To alleviate this problem, I developed <a href="https://github.com/ularrarte/Hounai/blob/main/Updator.py">Updator</a>, his tool allows users to create intermediate versions based on their current version while simultaneously updating all necessary paths in the OUT nodes (location of the files was something quite robust within the pipeline and could not be altered). 
 To enhance usability, I also designed a graphical interface using PySide2.
 
+## Add points or objects to a any surface through viewport
 
+One of the first tools that I developed.
+
+
+
+
+##
+
+I will use this last part of the post to mention other projects, even if they don't focus on the world of special effects. I believe this can help provide some context about my background.
+
+- <a href="https://github.com/grupo9web/Neon-Rush">Neon Rush</a>
+- <a href="https://github.com/grupo9web/GualAPP">GualApp</a>
 
 
