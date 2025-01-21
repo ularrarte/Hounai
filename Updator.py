@@ -17,16 +17,21 @@ class FontDemo(QtWidgets.QWidget):
             hou.ui.displayMessage(mssg, severity=hou.severityType.Error)
             quit()            
         
+        # Initialize the base QWidget
         QtWidgets.QWidget.__init__(self, parent)
+        # Adjust the "always on top" property
         self.setWindowFlags(self.windowFlags() ^ QtCore.Qt.WindowStaysOnTopHint)
         
+        # Create the main layout and group box
         layout = QtWidgets.QVBoxLayout(self)
-        grpBox = QtWidgets.QGroupBox("Pisciniqui tools")
+        grpBox = QtWidgets.QGroupBox("Updator tools")
         
+        # Create one horizontal and two vertical layouts
         hbox = QtWidgets.QHBoxLayout()
         vbox = QtWidgets.QVBoxLayout()
         low = QtWidgets.QVBoxLayout()
 
+        # Set windows dimensions and title
         self.resize(500, 140)
         self.setMaximumHeight(140)
         self.setMinimumHeight(140)        
@@ -34,29 +39,37 @@ class FontDemo(QtWidgets.QWidget):
         
         self.label = QtWidgets.QLabel('Select one of the folowing options:', self)
 
+        # Set the main layout to horizontal layout (hbox)
         self.setLayout(hbox)
 
+        # Create buttons
         self.button = QtWidgets.QPushButton('Updates Cahes', self)
         self.button.setFocusPolicy(QtCore.Qt.NoFocus)
-        
-        self.chechbox = QtWidgets.QCheckBox('Save Houdini File', self)
 
-        hbox.addWidget(self.button)
-        
         self.button2 = QtWidgets.QPushButton('Save and Increment', self)
         self.button2.setFocusPolicy(QtCore.Qt.NoFocus)
         
+        # Create a checkbox
+        self.chechbox = QtWidgets.QCheckBox('Save Houdini File', self)
+        
+        # Add the first button to the horizontal layout
+        hbox.addWidget(self.button)
+        # Add the second button to the horizontal layout
         hbox.addWidget(self.button2)
-        vbox.addWidget(self.chechbox)        
+        # Add the checkbox to the vertical layout
+        vbox.addWidget(self.chechbox)
+        # Add the label to the lower vertical layout
         low.addWidget(self.label)
         
+         # Combine layouts into the group box
         low.addLayout(hbox)
-        low.addLayout(vbox)
-        
+        low.addLayout(vbox)        
         grpBox.setLayout(low)
         
+        # Add the group box to the main layout
         layout.addWidget(grpBox)
         
+        # Connect button signals to their respective methods
         self.button.clicked.connect(self.UpdateCaches)
         self.button2.clicked.connect(self.SaveIncrement)
 
