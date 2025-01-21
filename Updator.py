@@ -37,6 +37,7 @@ class FontDemo(QtWidgets.QWidget):
         self.setMinimumHeight(140)        
         self.setWindowTitle('Updator')
         
+        # Create a label with instructions
         self.label = QtWidgets.QLabel('Select one of the folowing options:', self)
 
         # Set the main layout to horizontal layout (hbox)
@@ -61,7 +62,7 @@ class FontDemo(QtWidgets.QWidget):
         # Add the label to the lower vertical layout
         low.addWidget(self.label)
         
-         # Combine layouts into the group box
+        # Combine layouts into the group box
         low.addLayout(hbox)
         low.addLayout(vbox)        
         grpBox.setLayout(low)
