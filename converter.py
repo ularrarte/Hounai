@@ -13,7 +13,7 @@ def conversor():
             quit()
     
         
-        # Function the get parameters from the Arnold Node        
+        # Function that get parameters from the Arnold Node        
         def getKeyframes():
             kfms = {}
             parameters = node.parms()
@@ -57,7 +57,7 @@ def conversor():
             return m_node
             
         
-        # Functions to set the parameters for the mantra light
+        # Method to set the parameters for the mantra light
         def setTras(trs):
             m_node.parm('tx').set(trs[0])
             m_node.parm('ty').set(trs[1])
@@ -70,7 +70,7 @@ def conversor():
             
         def setKeyframes(keys):
         
-            ##Create a dictionary for each correspondant Arnold-Mantra parameters
+            # Create a dictionary for each correspondant Arnold-Mantra parameters
             dict = {}
             dict['ar_intensity'] = 'light_intensity'
             dict['ar_exposure'] = 'light_exposure'
@@ -158,7 +158,7 @@ def conversor():
                 # Setting the parameters for the new light
                 m_node.parm('areasize1').set(tube_h)
                 m_node.parm('areasize2').set(tube_r * 13)
-                # We also need to rotate de light 90 in Z axis to match the orientation
+                # We also need to rotate the light 90 in Z axis to match the orientation
                 rot[2] = rot[2] + 90
                 setRot(rot)
             elif type == 6:
@@ -169,13 +169,13 @@ def conversor():
                 if texture == 1:
                     path_exr = node.parm('ar_light_color_texture').eval()
                     m_node.parm('env_map').set(path_exr)
-                # We can also the color type to 'shader', so we need to dive into the node to find the path.
+                # We can also change the color type to 'shader', so we need to dive into the node to find the path.
                 if texture == 2:
                     mat_node = hou.node(node.parm('ar_light_color_shader').eval())
                     mat_node = node.node('shopnet').node('arnold_vopnet').node('image1').parm('filename').eval()
                     m_node.parm('env_map').set(mat_node)
                     
-                    # In order to match the initial rotation, we need to rotate it 180
+                    # In order to match the initial rotation, we need to rotate it 180º
                     m_node.parm('ry').set(m_node.parm('ry').eval() + 180)            
             
         
