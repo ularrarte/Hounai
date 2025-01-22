@@ -45,10 +45,10 @@ class State(object):
         # Set the collision geometry for ray intersection
         self.collisiongeo = self.node.node("COMPLEXCOLLISION").geometry()
 
-        # Retrieve the multiparm paramete
+        # Retrieve the multiparm parameter
         self.multiparm = self.node.parm("iPlacements")
         
-        # Get the number of existing entries and increment for the new placement
+        # Get the number of existing entries and increment it for the new placement
         entries = self.GetMultiparmEntries(kwargs)
         self.entries = entries
         self.multiparm.set(entries + 1)
@@ -84,14 +84,13 @@ class State(object):
         currentValue = self.node.parm("iId_%s" % numentries).evalAsInt()      # Retrieve current value
         # Update the parameter with the new value, ensuring it doesn't go below 0
         self.node.parm(("iId_%s" % numentries)).set(max(currentValue + scroll, 0))
-
-            
+       
     
     def onMenuAction(self, kwargs):
         menu_item = kwargs["menu_item"]    
         if menu_item == "sometoggle":   
-            value = self.node.node("/obj/GRID_OBJ_PLACER/subnet1/attribwrangle5").parm("aux").eval()     # Retrieve the aux atribute
-            # Comparing and setting the atribute.
+            value = self.node.node("/obj/GRID_OBJ_PLACER/subnet1/attribwrangle5").parm("aux").eval()     # Retrieve the aux atributte
+            # Comparing and setting the attribute.
             if value == 0:
                 self.node.node("/obj/GRID_OBJ_PLACER/subnet1/attribwrangle5").parm("aux").set(1)         
             if value == 1
@@ -103,9 +102,9 @@ class State(object):
             if model_node:
                 return model_node
 
-            # Creating an object merge node, in case you want to bring a specific SOP
+            # Creating a object merge SOP, in case you want to bring a specific SOP
             model_node = hou.node('/obj/GRID_OBJ_PLACER').createNode('object_merge', "Vecinitos")
-            # Create a match size, to lay the object on the center.
+            # Create a match size SOP, to lay the object on the center
             ms_node = hou.node('/obj/GRID_OBJ_PLACER').createNode('matchsize', "Vecinitos_MS")
             # Adjusting position
             ms_node.parm("justify_y").set(1)
@@ -121,7 +120,7 @@ class State(object):
             ms_node.setInput(0, model_node)
             pw_node.setInput(0, ms_node)
 
-            # Layout the nodes porperly
+            # Layout the nodes properly
             model_node.moveToGoodPosition()
             ms_node.moveToGoodPosition() 
             pw_node.moveToGoodPosition()
@@ -184,7 +183,7 @@ class State(object):
         # Using the intersect function to check if we hitted something
         gi.intersect(origin, direction)
         
-        if gi.prim_num >= 0:        # Check if the ray hit a primitive
+        if gi.prim_num >= 0:        # Check if the ray hits a primitive
         
             hitPos = gi.position                                                # Update the hitPos
             numentries = self.GetMultiparmEntries(kwargs)                                
